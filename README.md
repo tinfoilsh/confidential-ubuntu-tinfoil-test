@@ -15,11 +15,17 @@ by repo + tag from the dashboard or:
 
 ## Connect
 
+The CVM boots an attested `host-ssh` key that sshd serves as its host key and
+the quote endorses. Verify it once and pin it for plain `ssh`:
+
+    tinfoil attest-ssh <enclave-host> --repo tinfoilsh/confidential-ubuntu-tinfoil-test --name workspace --install
+    ssh workspace
+
+Or tunnel over the enclave's attested TLS connection, so verifying the
+enclave and connecting to it are the same step:
+
     export TINFOIL_TUNNEL_API_KEY=...
     tinfoil ssh workspace
-
-This tunnels over the enclave's attested TLS connection, so verifying the
-enclave and connecting to it are the same step.
 
 ## Unlock
 

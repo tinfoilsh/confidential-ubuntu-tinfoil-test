@@ -3,6 +3,7 @@
 #
 # SSH_KEYS is set inline in tinfoil-config.yml, so the authorized key is
 # measured and covered by the attestation rather than supplied at deploy time.
+# sshd's HostKey is the boot-generated, attested `host-ssh` key the CVM grants.
 set -euo pipefail
 
 fail() { printf 'confidential-ubuntu: %s\n' "$*" >&2; exit 1; }
@@ -23,7 +24,8 @@ boot() {
 
     ldconfig
 
-    ssh-keygen -A
+    ssh-keygen -yf /run/tinfoil/keys/host-ssh/private_key.pem >/dev/null \
+        || fail 'attested host key /run/tinfoil/keys/host-ssh/private_key.pem is missing or unusable'
     exec /sbin/init
 }
 

@@ -19,7 +19,7 @@ volumes:
 
 containers:
   - name: "workspace"
-    image: "ghcr.io/tinfoilsh/confidential-ubuntu-tinfoil-test@sha256:0000000000000000000000000000000000000000000000000000000000000000" # rewritten at release
+    image: "ghcr.io/tinfoilsh/confidential-ubuntu-tinfoil-test@sha256:12cab483897c495f18a8a76c3ff8a102c0bbcb80c0677aa81253c8275e01ca1e" # v0.3.0
     restart: on-failure
     cvm_admin: true
     stop_signal: SIGRTMIN+3

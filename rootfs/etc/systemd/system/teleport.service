@@ -1,0 +1,11 @@
+[Unit]
+Description=Teleport agent
+After=network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/teleport start --config=/etc/teleport.yaml --token=/run/teleport-token
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

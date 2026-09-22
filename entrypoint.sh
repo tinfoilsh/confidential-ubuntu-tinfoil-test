@@ -26,6 +26,9 @@ boot() {
 
     ssh-keygen -yf /run/tinfoil/keys/host-ssh/private_key.pem >/dev/null \
         || fail 'attested host key /run/tinfoil/keys/host-ssh/private_key.pem is missing or unusable'
+    # The token name is derivable from the quote alone: the key's SPKI digest.
+    spki_sha256=$(openssl pkey -pubin -in /run/tinfoil/keys/teleport-join/public_key.pem -outform DER | sha256sum)
+    printf 'tinfoil-%s\n' "${spki_sha256:0:16}" > /run/teleport-token
     exec /sbin/init
 }
 

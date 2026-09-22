@@ -1,0 +1,14 @@
+version: v3
+teleport:
+  data_dir: /var/lib/teleport
+  proxy_server: tinfoil.teleport.sh:443
+  join_params:
+    method: bound_keypair
+    bound_keypair:
+      static_key_path: /run/tinfoil/keys/teleport-join/private_key.pem
+ssh_service:
+  enabled: true
+auth_service:
+  enabled: false
+proxy_service:
+  enabled: false
